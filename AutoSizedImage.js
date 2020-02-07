@@ -44,12 +44,8 @@ export default class AutoSizedImage extends PureComponent {
       this.state,
       finalSize
     );
-    let source = {};
-    if (!finalSize.width || !finalSize.height) {
-      source = Object.assign(source, this.props.source);
-    } else {
-      source = Object.assign(source, this.props.source);
-    }
+
+    let source = Object.assign(source, this.props.source);
 
     console.log(style, source)
 

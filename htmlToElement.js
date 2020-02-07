@@ -31,8 +31,6 @@ const Img = props => {
 
   const source = {
     uri: props.attribs.src,
-    width,
-    height,
   };
   return <AutoSizedImage source={source} style={imgStyle} />;
 };
