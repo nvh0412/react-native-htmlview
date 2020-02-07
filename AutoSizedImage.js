@@ -21,16 +21,6 @@ export default class AutoSizedImage extends PureComponent {
     };
   }
 
-  componentDidMount() {
-    //avoid repaint if width/height is given
-    if (this.props.style.width || this.props.style.height) {
-      return;
-    }
-    Image.getSize(this.props.source.uri, (w, h) => {
-      this.setState({width: w, height: h});
-    });
-  }
-
   render() {
     const finalSize = {};
     if (this.state.width > width) {
