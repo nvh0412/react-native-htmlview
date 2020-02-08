@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import htmlparser from 'htmlparser2-without-node-native';
 import entities from 'entities';
 
@@ -17,11 +17,11 @@ const defaultOpts = {
 
 const Img = props => {
   const width =
-    parseInt(props.attribs['width'], 10) || parseInt(props.attribs['data-width'], 10) || parseInt(props.attribs['w'], 10);
+    parseInt(props.attribs['w'], 10) ||parseInt(props.attribs['width'], 10) || parseInt(props.attribs['data-width'], 10);
   const height =
-    parseInt(props.attribs['height'], 10) ||
-    parseInt(props.attribs['data-height'], 10) ||
     parseInt(props.attribs['h'], 10) ||
+    parseInt(props.attribs['height'], 10) ||
+    parseInt(props.attribs['data-height'], 10)
     0;
 
   const imgStyle = {
@@ -30,7 +30,7 @@ const Img = props => {
   };
 
   const source = {
-    uri: props.attribs.src,
+    uri: props.attribs['data-src'],
   };
   return <AutoSizedImage source={source} style={imgStyle} />;
 };
@@ -165,6 +165,7 @@ export default function htmlToElement(rawHtml, customOpts = {}, done) {
     if (err) done(err);
     done(null, domToElement(dom));
   });
+
   const parser = new htmlparser.Parser(handler);
   parser.write(rawHtml);
   parser.done();

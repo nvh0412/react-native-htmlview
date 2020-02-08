@@ -1,44 +1,38 @@
 import React, {PureComponent} from 'react';
 import {
   Image,
+  Text,
+  View,
   Dimensions,
 } from 'react-native';
-
-const {width} = Dimensions.get('window');
-
-const baseStyle = {
-  backgroundColor: 'transparent',
-};
 
 export default class AutoSizedImage extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      // set width 1 is for preventing the warning
-      // You must specify a width and height for the image %s
-      width: this.props.style.width || 1,
-      height: this.props.style.height || 1,
-    };
   }
 
   render() {
+    const { width, height } = this.props.style;
     const finalSize = {};
-    if (this.state.width > width) {
-      finalSize.width = width;
-      const ratio = width / this.state.width;
-      finalSize.height = this.state.height * ratio;
+    const screenWidth = Dimensions.get('window').width;
+
+    if (width > screenWidth) {
+      finalSize.width = screenWidth - 36;
+      const ratio = screenWidth / width;
+      finalSize.height = height * ratio;
     }
     const style = Object.assign(
-      baseStyle,
+      { backgroundColor: 'transparent', resizeMode: 'contain' },
       this.props.style,
-      this.state,
       finalSize
     );
 
-    let source = Object.assign(source, this.props.source);
+    let source = Object.assign({}, this.props.source, finalSize);
 
-    console.log(style, source)
-
-    return <Image style={style} source={source} />;
+    return (
+      <Text>
+        <Image style={style} source={source} />
+      </Text>
+    );
   }
 }
