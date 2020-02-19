@@ -17,12 +17,16 @@ const defaultOpts = {
 
 const Img = props => {
   const width =
-    parseInt(props.attribs['w'], 10) ||parseInt(props.attribs['width'], 10) || parseInt(props.attribs['data-width'], 10);
+    parseInt(props.attribs['w'], 10) ||
+    parseInt(props.attribs['width'], 10) ||
+    parseInt(props.attribs['data-width'], 10) ||
+    '100%';
+
   const height =
     parseInt(props.attribs['h'], 10) ||
     parseInt(props.attribs['height'], 10) ||
-    parseInt(props.attribs['data-height'], 10)
-    0;
+    parseInt(props.attribs['data-height'], 10) ||
+    250;
 
   const imgStyle = {
     width,
