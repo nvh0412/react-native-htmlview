@@ -20,7 +20,7 @@ const Img = props => {
     parseInt(props.attribs['w'], 10) ||
     parseInt(props.attribs['width'], 10) ||
     parseInt(props.attribs['data-width'], 10) ||
-    400;
+    360;
 
   const height =
     parseInt(props.attribs['h'], 10) ||
